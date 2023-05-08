@@ -68,6 +68,7 @@ module Source
       Source::Extractor::Pixai,
       Source::Extractor::ArtStreet,
       Source::Extractor::Gumroad,
+      Source::Extractor::Misskey,
       Source::Extractor::Civitai,
     ]
 
@@ -300,7 +301,7 @@ module Source
           :tag_name => tag_name,
           :other_names => other_names,
           :profile_url => profile_url,
-          :profile_urls => profile_urls
+          :profile_urls => profile_urls,
         },
         :artists => artists.as_json(include: :sorted_urls),
         :image_urls => image_urls,
@@ -312,9 +313,9 @@ module Source
           :title => artist_commentary_title,
           :description => artist_commentary_desc,
           :dtext_title => dtext_artist_commentary_title,
-          :dtext_description => dtext_artist_commentary_desc
+          :dtext_description => dtext_artist_commentary_desc,
         },
-        :api_response => api_response
+        :api_response => api_response,
       }
     end
 

@@ -5,229 +5,232 @@ module IconHelper
   #
   # To add a new site, add the site name here, add the logo in public/images, and update app/logical/source/url/null.rb
   # if the site name is irregular.
-  SITE_ICON_NAMES = %w[
-    4chan
-    Adobe\ Portfolio
-    AllMyLinks
-    ArtStreet
-    Amazon
-    Ameblo
-    Amino
-    AniList
-    Anifty
-    Anime\ News\ Network
-    Animexx
-    Apple\ Music
-    Arca.live
-    Archive\ of\ Our\ Own
-    ArtStation
-    Art\ Fight
-    Artists&Clients
-    Aryion
-    Ask.fm
-    BCY
-    Bandcamp
-    Baraag
-    Beacons
-    Behance
-    Big\ Cartel
-    Biglobe
-    Bilibili
-    Blogger
-    Boosty
-    Booth
-    Buy\ Me\ a\ Coffee
-    Cafe24
-    Carrd
-    Catbox
-    Circle.ms
-    Civitai
-    Class101
-    Clip\ Studio
-    Coconala
-    Colors\ Live
-    Commishes
-    Creatorlink
-    Curious\ Cat
-    DLSite
-    Danbooru
-    Deviant\ Art
-    Discord
-    Doujinshi.org
-    Douyin
-    Drawcrowd
-    E-Hentai
-    Enty
-    Erogamescape
-    Etsy
-    Excite\ Blog
-    FC2
-    Facebook
-    FanFiction.Net
-    Fanbox
-    Fandom
-    Fantia
-    Fiverr
-    Flavors
-    Flickr
-    Foriio
-    Foundation
-    Furaffinity
-    Fusetter
-    Gelbooru
-    Geocities
-    Giftee
-    GitHub
-    Google
-    Gumroad
-    Gunsta
-    Hatena
-    Hatena\ Blog
-    Hentai\ Foundry
-    Hitomi
-    HoYoLAB
-    Imagis
-    Imgur
-    Infoseek
-    Inkbunny
-    Inprnt
-    Instagram
-    Itch.io
-    Jimdo
-    Joyreactor
-    Kakao
-    Kemono\ Party
-    Kickstarter
-    Kirby's\ Comic\ Art
-    Kiru\ Made
-    Ko-fi
-    Konachan
-    Last.fm
-    Letterboxd
-    Line
-    LinkedIn
-    Linktree
-    Listography
-    Lit.link
-    Livedoor
-    Lofter
-    Luscious
-    Mangaupdates
-    Marshmallow\ Qa
-    Mastodon
-    Mblg
-    Mega
-    Melonbooks
-    Mihoyo
-    Mihuashi
-    Mixi.jp
-    Monappy
-    Mottohomete
-    MyAnimeList
-    MyFigureCollection
-    Naver
-    Newgrounds
-    Nico\ Seiga
-    Nijie
-    Note
-    OCN
-    Objkt
-    Odaibako
-    Ofuse
-    OnlyFans
-    OpenSea
-    Overdoll
-    Partme
-    Patreon
-    Pawoo
-    PayPal
-    Peing
-    Photozou
-    Piapro.jp
-    Picarto
-    Picdig
-    Picrew
-    Piczel
-    Pillowfort
-    Pinterest
-    Pixai
-    Pixel\ Joint
-    Pixiv
-    Pixiv\ Sketch
-    Plurk
-    Poipiku
-    Pornhub
-    Portfoliobox
-    Postype
-    Potofu
-    Privatter
-    Profcard
-    Recomet
-    RedGIFs
-    Redbubble
-    Reddit
-    Rule34.us
-    Rule34.xxx
-    Safebooru
-    Sakura.ne.jp
-    Sankaku\ Complex
-    Shopee
-    Skeb
-    Sketchfab
-    Sketchmob
-    Skima
-    Society6
-    SoundCloud
-    Spotify
-    Steam
-    Stickam
-    Storenvy
-    Streamlabs
-    SubscribeStar
-    SuperRare
-    Suzuri
-    TBIB
-    Taobao
-    Tapas
-    TeePublic
-    Telegram
-    The\ Interviews
-    Tictail
-    Tiktok
-    Tinami
-    Tistory
-    Togetter
-    Toranoana
-    Toyhouse
-    Trakteer
-    Trello
-    Tumblr
-    Twipple
-    TwitPic
-    Twitcasting
-    Twitch
-    Twitter
-    Twpf
-    Ustream
-    Vimeo
-    Vk
-    Wavebox
-    Weasyl
-    Webmshare
-    Webtoons
-    Weebly
-    Weibo
-    Wikipedia
-    Willow
-    Wix
-    WordPress
-    Yahoo
-    Yande.re
-    Yfrog
-    Youtube
-    Zerochan
-    html.co.jp
-    tsunagu.cloud
+  SITE_ICON_NAMES = [
+    "4chan",
+    "Adobe Portfolio",
+    "AllMyLinks",
+    "ArtStreet",
+    "Amazon",
+    "Ameblo",
+    "Amino",
+    "AniList",
+    "Anifty",
+    "Anime News Network",
+    "Animexx",
+    "Apple Music",
+    "Arca.live",
+    "Archive of Our Own",
+    "ArtStation",
+    "Art Fight",
+    "Artists&Clients",
+    "Aryion",
+    "Ask.fm",
+    "BCY",
+    "Bandcamp",
+    "Baraag",
+    "Beacons",
+    "Behance",
+    "Big Cartel",
+    "Biglobe",
+    "Bilibili",
+    "Blogger",
+    "Boosty",
+    "Booth",
+    "Buy Me a Coffee",
+    "Cafe24",
+    "Carrd",
+    "Catbox",
+    "Circle.ms",
+    "Civitai",
+    "Class101",
+    "Clip Studio",
+    "Coconala",
+    "Colors Live",
+    "Commishes",
+    "Creatorlink",
+    "Curious Cat",
+    "DLSite",
+    "Danbooru",
+    "Deviant Art",
+    "Discord",
+    "Doujinshi.org",
+    "Douyin",
+    "Drawcrowd",
+    "E-Hentai",
+    "Enty",
+    "Erogamescape",
+    "Etsy",
+    "Excite Blog",
+    "FC2",
+    "Facebook",
+    "FanFiction.Net",
+    "Fanbox",
+    "Fandom",
+    "Fantia",
+    "Fiverr",
+    "Flavors",
+    "Flickr",
+    "Foriio",
+    "Foundation",
+    "Furaffinity",
+    "Fusetter",
+    "Gelbooru",
+    "Geocities",
+    "Giftee",
+    "GitHub",
+    "Google",
+    "Gumroad",
+    "Gunsta",
+    "Hatena",
+    "Hatena Blog",
+    "Hentai Foundry",
+    "Hitomi",
+    "HoYoLAB",
+    "Imagis",
+    "Imgur",
+    "Infoseek",
+    "Inkbunny",
+    "Inprnt",
+    "Instagram",
+    "Itch.io",
+    "Jimdo",
+    "Joyreactor",
+    "Kakao",
+    "Kemono Party",
+    "Kickstarter",
+    "Kirby's Comic Art",
+    "Kiru Made",
+    "Ko-fi",
+    "Konachan",
+    "Last.fm",
+    "Letterboxd",
+    "Line",
+    "LinkedIn",
+    "Linktree",
+    "Listography",
+    "Lit.link",
+    "Livedoor",
+    "Lofter",
+    "Luscious",
+    "Mangaupdates",
+    "Marshmallow Qa",
+    "Mastodon",
+    "Mblg",
+    "Mega",
+    "Melonbooks",
+    "Mihoyo",
+    "Mihuashi",
+    "Misskey.art",
+    "Misskey.design",
+    "Misskey.io",
+    "Mixi.jp",
+    "Monappy",
+    "Mottohomete",
+    "MyAnimeList",
+    "MyFigureCollection",
+    "Naver",
+    "Newgrounds",
+    "Nico Seiga",
+    "Nijie",
+    "Note",
+    "OCN",
+    "Objkt",
+    "Odaibako",
+    "Ofuse",
+    "OnlyFans",
+    "OpenSea",
+    "Overdoll",
+    "Partme",
+    "Patreon",
+    "Pawoo",
+    "PayPal",
+    "Peing",
+    "Photozou",
+    "Piapro.jp",
+    "Picarto",
+    "Picdig",
+    "Picrew",
+    "Piczel",
+    "Pillowfort",
+    "Pinterest",
+    "Pixai",
+    "Pixel Joint",
+    "Pixiv",
+    "Pixiv Sketch",
+    "Plurk",
+    "Poipiku",
+    "Pornhub",
+    "Portfoliobox",
+    "Postype",
+    "Potofu",
+    "Privatter",
+    "Profcard",
+    "Recomet",
+    "RedGIFs",
+    "Redbubble",
+    "Reddit",
+    "Rule34.us",
+    "Rule34.xxx",
+    "Safebooru",
+    "Sakura.ne.jp",
+    "Sankaku Complex",
+    "Shopee",
+    "Skeb",
+    "Sketchfab",
+    "Sketchmob",
+    "Skima",
+    "Society6",
+    "SoundCloud",
+    "Spotify",
+    "Steam",
+    "Stickam",
+    "Storenvy",
+    "Streamlabs",
+    "SubscribeStar",
+    "SuperRare",
+    "Suzuri",
+    "TBIB",
+    "Taobao",
+    "Tapas",
+    "TeePublic",
+    "Telegram",
+    "The Interviews",
+    "Tictail",
+    "Tiktok",
+    "Tinami",
+    "Tistory",
+    "Togetter",
+    "Toranoana",
+    "Toyhouse",
+    "Trakteer",
+    "Trello",
+    "Tumblr",
+    "Twipple",
+    "TwitPic",
+    "Twitcasting",
+    "Twitch",
+    "Twitter",
+    "Twpf",
+    "Ustream",
+    "Vimeo",
+    "Vk",
+    "Wavebox",
+    "Weasyl",
+    "Webmshare",
+    "Webtoons",
+    "Weebly",
+    "Weibo",
+    "Wikipedia",
+    "Willow",
+    "Wix",
+    "WordPress",
+    "Yahoo",
+    "Yande.re",
+    "Yfrog",
+    "Youtube",
+    "Zerochan",
+    "html.co.jp",
+    "tsunagu.cloud",
   ]
 
   def svg_icon_tag(name, id = name, class: nil, **options)
