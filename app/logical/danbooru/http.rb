@@ -42,18 +42,18 @@ module Danbooru
     attr_accessor :max_size, :http
 
     class << self
-      delegate :get, :head, :put, :post, :delete, :cache, :follow, :max_size, :timeout, :auth, :basic_auth, :headers, :cookies, :use, :proxy, :public_only, :with_legacy_ssl, :download_media, to: :new
+      delegate :get, :head, :put, :post, :delete, :parsed_get, :parsed_post, :cache, :follow, :max_size, :timeout, :auth, :basic_auth, :headers, :cookies, :use, :proxy, :public_only, :with_legacy_ssl, :download_media, to: :new
     end
 
     # The default HTTP client.
     def self.default
       Danbooru::Http::ApplicationClient.new
-        .timeout(DEFAULT_TIMEOUT)
-        .headers("Accept-Encoding": "gzip")
-        .use(normalize_uri: { normalizer: ->(uri) { HTTP::URI.parse(Addressable::URI.encode_component(uri, "[[:ascii:]&&[^ ]]")) } }) # XXX Percent-encode Unicode and space characters to avoid "URI::InvalidURIError: URI must be ascii only" error
-        .use(:auto_inflate)
-        .use(redirector: { max_redirects: MAX_REDIRECTS })
-        .use(:session)
+                                       .timeout(DEFAULT_TIMEOUT)
+                                       .headers("Accept-Encoding": "gzip")
+                                       .use(normalize_uri: { normalizer: ->(uri) { HTTP::URI.parse(Addressable::URI.encode_component(uri, "[[:ascii:]&&[^ ]]")) } }) # XXX Percent-encode Unicode and space characters to avoid "URI::InvalidURIError: URI must be ascii only" error
+                                       .use(:auto_inflate)
+                                       .use(redirector: { max_redirects: MAX_REDIRECTS })
+                                       .use(:session)
     end
 
     # The default HTTP client for requests to external websites. This includes API calls to external services, fetching source data, and downloading images.
@@ -106,6 +106,14 @@ module Danbooru
 
     def follow(*args)
       dup.tap { |o| o.http = o.http.follow(*args) }
+    end
+
+    def parsed_get(url, **options)
+      parsed_request(:get, url, **options)
+    end
+
+    def parsed_post(url, **options)
+      parsed_request(:post, url, **options)
     end
 
     def max_size(size)
@@ -182,12 +190,12 @@ module Danbooru
         response = get(url)
 
         raise DownloadError, "#{url} failed with code #{response.status}" if response.status != 200
-        raise FileTooLargeError, "File size too large (size: #{response.content_length.to_i.to_formatted_s(:human_size)}; max size: #{@max_size.to_formatted_s(:human_size)})" if @max_size && response.content_length.to_i > @max_size
+        raise FileTooLargeError, "File size too large (size: #{response.content_length.to_i.to_fs(:human_size)}; max size: #{@max_size.to_fs(:human_size)})" if @max_size && response.content_length.to_i > @max_size
 
         size = 0
         response.body.each do |chunk|
           size += chunk.size
-          raise FileTooLargeError, "File size too large (max size: #{@max_size.to_formatted_s(:human_size)})" if @max_size && size > @max_size
+          raise FileTooLargeError, "File size too large (max size: #{@max_size.to_fs(:human_size)})" if @max_size && size > @max_size
           file.write(chunk)
         end
 
@@ -205,8 +213,16 @@ module Danbooru
     # @param url [String] the URL to request
     # @param options [Hash] the URL parameters
     # @return [HTTP::Response] the HTTP response
-    def request(method, url, **options)
-      http.send(method, url, **options)
+    def request(method, url, format: nil, **options)
+      response = http.send(method, url, **options)
+
+      if format
+        mime_type = Mime::Type.lookup_by_extension(format).to_s
+        content_type = HTTP::ContentType.parse(mime_type)
+        response.instance_eval { @content_type = content_type }
+      end
+
+      response
     rescue OpenSSL::SSL::SSLError
       fake_response(590)
     rescue ValidatingSocket::ProhibitedIpError
@@ -232,11 +248,22 @@ module Danbooru
     def request!(method, url, **options)
       response = request(method, url, **options)
 
-      if response.status.in?(200..399)
-        response
-      else
-        raise Error, "#{method.upcase} #{url} failed (HTTP #{response.status})"
-      end
+      raise Error, "#{method.upcase} #{url} failed (HTTP #{response.status})" unless response.status.in?(200..399)
+      response
+    end
+
+    # Perform a HTTP request for the given URL and return the parsed JSON, XML, or HTML response.
+    # Return nil on error, or if the URL was blank.
+    #
+    # @param method [String] The HTTP method.
+    # @param url [String] The URL to request.
+    # @param options [Hash] The URL parameters.
+    # @return [Hash, Array, Nokogiri::HTML::Document, nil] The parsed HTTP response body, or nil on error.
+    def parsed_request(method, url, **options)
+      return nil if url.blank?
+      response = request(method, url, **options)
+      return nil if response.code != 200
+      response.parse
     end
 
     def fake_response(status)
